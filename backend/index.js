@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -7,7 +8,6 @@ import bookRouter from "./router/bookRouter.js";
 dotenv.config();
 
 const app = express();
-
 const PORT = Number(process.env.PORT || process.env.BACKEND_PORT || 5000);
 
 app.use(cors());
@@ -15,9 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res
-    .status(200)
-    .send("<h1>Welcome to RESTful API Book Management App</h1>");
+  res.status(200).send("<h1>Welcome to RESTful API Book Management App</h1>");
 });
 
 app.get("/health", (req, res) => {
@@ -27,7 +25,7 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.use("/api/book", bookRouter);
+app.use("/api/books", bookRouter);
 
 async function startServer() {
   try {
@@ -38,7 +36,9 @@ async function startServer() {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Failed to start server:", error.message);
+    console.error("Failed to start server:", error);
     process.exit(1);
   }
 }
+
+startServer();
